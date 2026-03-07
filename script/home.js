@@ -1,24 +1,38 @@
-const allBtn = document.getElementById('all');
-const openBtn = document.getElementById('open');
-const closeBtn = document.getElementById('close');
-const cardContainer = document.getElementById('card-container');
-const allIssue = document.getElementById('all-issues');
+const allBtn = document.getElementById("all");
+const openBtn = document.getElementById("open");
+const closeBtn = document.getElementById("close");
+const cardContainer = document.getElementById("card-container");
+const allIssue = document.getElementById("all-issues");
+const myModal = document.getElementById("my_modal_1");
+const modalTitle =document.getElementById('modal-title')
+const modulOpen =document.getElementById('modul-open')
+const modalUpdate =document.getElementById('modal-update')
+const modulAuthor =document.getElementById('modul-author')
+const dataLabel =document.getElementById('data-label')
+const dataLabels =document.getElementById('data-labels')
+const modulDescription =document.getElementById('modul-description')
+const assignee =document.getElementById('assignee');
+const modules =document.getElementById('modules')
 
-let masterData = []; 
+
+let masterData = [];
 
 function activateButton(activeBtn) {
-    [allBtn, openBtn, closeBtn].forEach(btn => btn.classList.remove('btn-primary'));
-    activeBtn.classList.add('btn-primary');
+  [allBtn, openBtn, closeBtn].forEach((btn) =>
+    btn.classList.remove("btn-primary"),
+  );
+  activeBtn.classList.add("btn-primary");
 }
 
-// Card er HTML generate korar function (Duplicate code komanor jonno)
 function createCardHTML(element) {
-    const isOpen = element.status === 'open';
-    const borderColor = isOpen ? 'border-green-400' : 'border-indigo-600';
-    const statusImg = isOpen ? 'assets/Open-Status.png' : '../assets/Closed- Status .png';
+  const isOpen = element.status === "open";
+  const borderColor = isOpen ? "border-green-400" : "border-indigo-600";
+  const statusImg = isOpen
+    ? "assets/Open-Status.png"
+    : "../assets/Closed- Status .png";
 
-    return `
-        <div class="border-t-2 ${`borderColor`} card shadow mb-4 grid grid-cols-1">
+  return `
+        <div onclick= 'moduls(${element.id})' class="border-t-2 ${borderColor} card shadow mb-4 grid grid-cols-1">
             <div class="flex justify-between pl-5 pt-5 pr-5">
                 <img src="${statusImg}" alt="status" />
                 <button class="px-5 py-1 rounded-lg bg-red-300">${element.priority}</button>
@@ -28,11 +42,11 @@ function createCardHTML(element) {
             <div class="sm:flex gap-2 mt-3 p-5 ">
                 <button class="btn btn-xs bg-[#FEECEC] rounded-2xl">
                     <img src="assets/BugDroid.png" alt="" />
-                    <span class="text-sm text-[#F24B4B]">${element.labels[0] || 'N/A'}</span>
+                    <span class="text-sm text-[#F24B4B]">${element.labels[0] || "N/A"}</span>
                 </button>
                 <button class="btn btn-xs bg-[#FEECEC] rounded-2xl ">
                     <img src="assets/Vector.png" alt="" />
-                    <span class="text-[#F24B4B]">${element.labels[1] || 'N/A'}</span>
+                    <span class="text-[#F24B4B]">${element.labels[1] || "N/A"}</span>
                 </button>
             </div>
             <hr class="border-gray-300">
@@ -41,50 +55,63 @@ function createCardHTML(element) {
         </div>`;
 }
 
-// Data display korar main function
 const displayData = (data) => {
-    cardContainer.innerHTML = ""; // Purono card gulo muche fela
-    data.forEach(element => {
-        const div = document.createElement('div');
-        div.innerHTML = createCardHTML(element);
-        cardContainer.appendChild(div);
-    });
-}
-
+  cardContainer.innerHTML = ""; // Purono card gulo muche fela
+  data.forEach((element) => {
+    const div = document.createElement("div");
+    div.innerHTML = createCardHTML(element);
+    cardContainer.appendChild(div);
+  });
+};
 
 async function alldataLoad() {
-    try {
-        const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
-        const result = await res.json();
-        masterData = result.data; 
-        displayData(masterData);
-    } catch (error) {
-        console.error("Data load hote somossa hoyeche:", error);
-    }
+  try {
+    const res = await fetch(
+      "https://phi-lab-server.vercel.app/api/v1/lab/issues",
+    );
+    const result = await res.json();
+    masterData = result.data;
+    displayData(masterData);
+  } catch (error) {
+    console.error("Data load hote somossa hoyeche:", error);
+  }
 }
 
-// --- Event Listeners (Filtering) ---
-
-allBtn.addEventListener('click',function ()  {
-    activateButton(allBtn);
-    displayData(masterData);
-    allIssue.innerText = masterData.length +' Issues'
+allBtn.addEventListener("click", function () {
+  activateButton(allBtn);
+  displayData(masterData);
+  allIssue.innerText = masterData.length + " Issues";
 });
 
-openBtn.addEventListener('click', () => {
-    activateButton(openBtn);
-    const filtered = masterData.filter(item => item.status === 'open');
-    displayData(filtered);
-    allIssue.innerText = filtered.length +' Issues'
-    
+openBtn.addEventListener("click", () => {
+  activateButton(openBtn);
+  const filtered = masterData.filter((item) => item.status === "open");
+  displayData(filtered);
+  allIssue.innerText = filtered.length + " Issues";
 });
 
-closeBtn.addEventListener('click', () => {
-    activateButton(closeBtn);
-    const filtered = masterData.filter(item => item.status === 'closed');
-    displayData(filtered);
-    allIssue.innerText = filtered.length +' Issues'
+closeBtn.addEventListener("click", () => {
+  activateButton(closeBtn);
+  const filtered = masterData.filter((item) => item.status === "closed");
+  displayData(filtered);
+  allIssue.innerText = filtered.length + " Issues";
 });
-
+async function moduls(dataId) {
+  myModal.showModal();
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${dataId}`,
+  );
+  const data = await res.json();
+  const modulData = data.data;
+ modalTitle.textContent = modulData.title;
+ modulOpen.textContent = modulData.status;
+ modulAuthor.textContent = modulData.author;
+ modalUpdate.textContent = modulData.updatedAt;
+ dataLabel.textContent = modulData.labels[0];
+ dataLabels.textContent = modulData.labels[1];
+ modulDescription.textContent =modulData.description;
+ assignee.textContent =modulData.assignee;
+ modules.textContent =modulData.status;
+}
 // Initial Load
 alldataLoad();

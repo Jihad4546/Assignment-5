@@ -60,7 +60,7 @@
         <button id="all" class="btn btn-primary py-5 px-10 rounded-lg">
           ALL
         </button>
-        <button id="open"  class="btn py-5 px-10 rounded-lg">Open</button>
+        <button id="open" class="btn py-5 px-10 rounded-lg">Open</button>
         <button id="close" class="btn py-5 px-10 rounded-lg">Close</button>
       </div>
     </section>
@@ -91,10 +91,53 @@
     </section>
     <div
       id="card-container"
-      class="w-11/12 m-auto mt-10 grid grid-cols-4 gap-5"
-    >
-     
-    </div>
+      class="w-11/12 m-auto mt-10  grid md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+    ></div>
+
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
+    <dialog id="my_modal_1" class="modal">
+      <div class="modal-box">
+        <h3 id="modal-title" class="text-lg font-bold">Fix broken image uploads</h3>
+        <div class="flex">
+          <button id="modul-open" class="px-5 rounded-lg bg-red-300">Open</button>
+          <li id="modul-author" class="ml-5">Opened by Fahim Ahmed</li>
+          <li id="modal-update" class="ml-5">22/02/2026</li>
+        </div>
+        <div class="flex gap-2 mt-3">
+          <button  class="btn btn-xs bg-[#FEECEC] rounded-2xl">
+            <img src="assets/BugDroid.png" alt="" />
+            <span id="data-label" class="text-sm text-[#F24B4B]">HM HUG vaiya</span>
+          </button>
+          <button class="btn btn-xs bg-[#FEECEC] rounded-2xl">
+            <img src="assets/Vector.png" alt="" />
+            <span id="data-labels" class="text-[#F24B4B]">jihad vaiya</span>
+          </button>
+        </div>
+        <p id="modul-description" class="text-sm mt-3">
+          The navigation menu doesn't collapse properly on mobile devices. Need
+          to fix the responsive behavior.
+        </p>
+        <div class="md:flex  shadow p-5 rounded-xl">
+          <div>
+            <p>Assignee:</p>
+            <h1 id="assignee">Fahim Ahmed</h1>
+          </div>
+          <div class="md:ml-20">
+            <p>Priority:</p>
+            <button id="modules" class="px-5 rounded-lg bg-red-300">Open</button>
+          </div>
+        </div>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
     <script src="script/home.js"></script>
   </body>
 </html>
+
