@@ -4,16 +4,15 @@ const closeBtn = document.getElementById("close");
 const cardContainer = document.getElementById("card-container");
 const allIssue = document.getElementById("all-issues");
 const myModal = document.getElementById("my_modal_1");
-const modalTitle =document.getElementById('modal-title')
-const modulOpen =document.getElementById('modul-open')
-const modalUpdate =document.getElementById('modal-update')
-const modulAuthor =document.getElementById('modul-author')
-const dataLabel =document.getElementById('data-label')
-const dataLabels =document.getElementById('data-labels')
-const modulDescription =document.getElementById('modul-description')
-const assignee =document.getElementById('assignee');
-const modules =document.getElementById('modules')
-
+const modalTitle = document.getElementById("modal-title");
+const modulOpen = document.getElementById("modul-open");
+const modalUpdate = document.getElementById("modal-update");
+const modulAuthor = document.getElementById("modul-author");
+const dataLabel = document.getElementById("data-label");
+const dataLabels = document.getElementById("data-labels");
+const modulDescription = document.getElementById("modul-description");
+const assignee = document.getElementById("assignee");
+const modules = document.getElementById("modules");
 
 let masterData = [];
 
@@ -27,8 +26,11 @@ function activateButton(activeBtn) {
 function createCardHTML(element) {
   const isOpen = element.status === "open";
   const borderColor = isOpen ? "border-green-400" : "border-indigo-600";
-  const statusImg = isOpen ? "./assets/Open-Status.png":"./assets/Closed- Status .png";
-  
+  const statusImg = isOpen
+    ? ` <img src="./assets/Closed- Status .png" alt="">`
+    : `<img src="./assets/Open-Status.png" alt="">
+`;
+
   return `
         <div onclick= 'moduls(${element.id})' class="border-t-2 ${borderColor} card shadow mb-4 grid grid-cols-1">
             <div class="flex justify-between pl-5 pt-5 pr-5">
@@ -101,15 +103,15 @@ async function moduls(dataId) {
   );
   const data = await res.json();
   const modulData = data.data;
- modalTitle.textContent = modulData.title;
- modulOpen.textContent = modulData.status;
- modulAuthor.textContent = modulData.author;
- modalUpdate.textContent = modulData.updatedAt;
- dataLabel.textContent = modulData.labels[0];
- dataLabels.textContent = modulData.labels[1];
- modulDescription.textContent =modulData.description;
- assignee.textContent =modulData.assignee;
- modules.textContent =modulData.status;
+  modalTitle.textContent = modulData.title;
+  modulOpen.textContent = modulData.status;
+  modulAuthor.textContent = modulData.author;
+  modalUpdate.textContent = modulData.updatedAt;
+  dataLabel.textContent = modulData.labels[0];
+  dataLabels.textContent = modulData.labels[1];
+  modulDescription.textContent = modulData.description;
+  assignee.textContent = modulData.assignee;
+  modules.textContent = modulData.status;
 }
 // Initial Load
 alldataLoad();
