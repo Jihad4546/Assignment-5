@@ -2,6 +2,7 @@ const allBtn = document.getElementById('all');
 const openBtn = document.getElementById('open');
 const closeBtn = document.getElementById('close');
 const cardContainer = document.getElementById('card-container');
+const allIssue = document.getElementById('all-issues');
 
 let masterData = []; 
 
@@ -17,7 +18,7 @@ function createCardHTML(element) {
     const statusImg = isOpen ? 'assets/Open-Status.png' : '../assets/Closed- Status .png';
 
     return `
-        <div class="border-t-2 ${borderColor} card shadow mb-4 grid grid-cols-1">
+        <div class="border-t-2 ${`borderColor`} card shadow mb-4 grid grid-cols-1">
             <div class="flex justify-between pl-5 pt-5 pr-5">
                 <img src="${statusImg}" alt="status" />
                 <button class="px-5 py-1 rounded-lg bg-red-300">${element.priority}</button>
@@ -64,21 +65,25 @@ async function alldataLoad() {
 
 // --- Event Listeners (Filtering) ---
 
-allBtn.addEventListener('click', () => {
+allBtn.addEventListener('click',function ()  {
     activateButton(allBtn);
     displayData(masterData);
+    allIssue.innerText = masterData.length +' Issues'
 });
 
 openBtn.addEventListener('click', () => {
     activateButton(openBtn);
     const filtered = masterData.filter(item => item.status === 'open');
     displayData(filtered);
+    allIssue.innerText = filtered.length +' Issues'
+    
 });
 
 closeBtn.addEventListener('click', () => {
     activateButton(closeBtn);
     const filtered = masterData.filter(item => item.status === 'closed');
     displayData(filtered);
+    allIssue.innerText = filtered.length +' Issues'
 });
 
 // Initial Load
