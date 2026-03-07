@@ -27,9 +27,7 @@ function activateButton(activeBtn) {
 function createCardHTML(element) {
   const isOpen = element.status === "open";
   const borderColor = isOpen ? "border-green-400" : "border-indigo-600";
-  const statusImg = isOpen
-    ? "assets/Open-Status.png"
-    : "../assets/Closed- Status .png";
+  const statusImg = isOpen ? "assets/Open-Status.png": "/assets/Closed- Status .png";
 
   return `
         <div onclick= 'moduls(${element.id})' class="border-t-2 ${borderColor} card shadow mb-4 grid grid-cols-1">
