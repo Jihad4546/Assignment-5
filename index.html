@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 5 And GitHub Issues Tracker</title>
+    <!-- daisy ui and tailwind link  -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- google font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- font awesome icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- css link -->
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <header class="max-w-[520px] m-auto my-36 shadow-xl p-9 rounded-xl">
+      <div class="githube-cion text-center">
+        <i class="fa-brands fa-github text-8xl"></i>
+        <h2 class="text-xl font-bold py-3 space-x-3">GitHub Issues Tracker</h2>
+        <p class="text-[#64748B]">Sign in to manage your issues</p>
+      </div>
+      <div class="mt-10">
+        <label for="" class="text-xl">Username</label>
+        <br />
+        <input
+          class="w-full p-4 rounded-xl outline-slate-500 border-gray-300"
+          type="text"
+          name=""
+          id="Username"
+          placeholder="Enter Username"
+        />
+        <p class="mt-2 text-purple-600">Default: admin</p>
+      </div>
+      <div class="mt-5">
+        <label for="" class="text-xl">Password</label>
+        <br />
+        <input
+          class="w-full p-4 rounded-xl outline-slate-500 border-gray-300"
+          type="password"
+          name=""
+          id="Password"
+          placeholder="Enter Password"
+        />
+         <p class="mt-2 text-purple-600">Default: admin123</p>
+         <button onclick="login()" class="btn btn-primary w-full mt-4 p-7 rounded-xl">Sign In</button>
+          <div class="divider my-7">OR</div>
+          <div class="text-center mt-10">
+            <p class="text-[#64748B] pb-9">Demo Credentials:</p>
+            <p><span class="font-bold">Username:</span>admin</p>
+            <p><span class="font-bold">Password:</span>admin123</p>
+          </div>
+      </div>
+    </header>
+    <!-- main section -->
+    
+
+
+    <script src="script/login.js"></script>
+  </body>
+</html>
