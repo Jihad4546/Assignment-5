@@ -125,14 +125,15 @@ async function moduls(dataId) {
 btnSearch.addEventListener("click", () => {
   const inputSearch = document
     .getElementById("input-search")
-    .value.trim().toLowerCase();
+  const inputvalue = inputSearch.value.trim().toLowerCase();
 
   const filteredData = masterData.filter((item) =>
-    item.title.toLowerCase().includes(inputSearch)
+    item.title.toLowerCase().includes(inputvalue) 
   );
-
+  
   displayData(filteredData);
   allIssue.innerText = filteredData.length + " Issues";
+  inputSearch.value = '';
 });
 
 // Initial Load
