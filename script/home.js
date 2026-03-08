@@ -130,7 +130,7 @@ btnSearch.addEventListener("click", () => {
   const filteredData = masterData.filter((item) =>
     item.title.toLowerCase().includes(inputvalue) 
   );
-  
+   
   displayData(filteredData);
   allIssue.innerText = filteredData.length + " Issues";
   inputSearch.value = '';
