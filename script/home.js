@@ -26,6 +26,17 @@ function activateButton(activeBtn) {
 
 function createCardHTML(element) {
   const isOpen = element.status === "open";
+  const buttonColor = element.priority ;
+ let buttonClass;
+
+if (buttonColor === "high") {
+  buttonClass = "bg-[#FEECEC] text-[#EF4444]";
+} else if (buttonColor === "medium") {
+  buttonClass = "bg-[#FFF6D1] text-[#F59E0B]";
+} else {
+  buttonClass = "bg-[#EEEFF2] text-[#9CA3AF]";
+}
+  
   const borderColor = isOpen ? "border-green-400" : "border-indigo-600";
   const statusImg = isOpen ? "assets/Open-Status.png" : "assets/Closed-Status.png";
 
@@ -33,7 +44,7 @@ function createCardHTML(element) {
         <div onclick= 'moduls(${element.id})' class="border-t-2 ${borderColor} card shadow mb-4 grid grid-cols-1">
             <div class="flex justify-between pl-5 pt-5 pr-5">
                 <img src="${statusImg}" alt="status" />
-                <button class="px-5 py-1 rounded-lg bg-red-300">${element.priority}</button>
+                <button class="px-5 py-1 rounded-lg ${buttonClass}">${element.priority}</button>
             </div>
             <h2 class="text-lg font-bold mt-5 pl-5">${element.title}</h2>
             <p class="line-clamp-2 pl-5 pr-5 mt-3">${element.description.slice(0 , 60)}...</p>
@@ -109,7 +120,7 @@ async function moduls(dataId) {
   dataLabels.textContent = modulData.labels[1];
   modulDescription.textContent = modulData.description;
   assignee.textContent = modulData.assignee;
-  modules.textContent = modulData.status;
+  modules.textContent = modulData.priority;
 }
 btnSearch.addEventListener("click", () => {
   const inputSearch = document
