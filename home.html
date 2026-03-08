@@ -53,7 +53,10 @@
             placeholder="Search Issue"
             class="input input-bordered w-full pl-10"
           />
-          <button  id="btn-search" class="sm:hidden btn btn-primary ml-3 text-lg">
+          <button
+            id="btn-search-mobile"
+            class="sm:hidden btn btn-primary ml-3 text-lg"
+          >
             + New Issue
           </button>
         </div>
@@ -111,6 +114,10 @@
         </div>
       </div>
     </section>
+    <div id="loading-spinner" class="flex justify-center items-center ">
+      <span class="loading loading-spinner loading-md"></span>
+      <span class="loading loading-spinner loading-lg"></span>
+    </div>
     <div
       id="card-container"
       class="w-11/12 m-auto mt-10 grid md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 gap-5"
@@ -156,7 +163,10 @@
           </div>
           <div class="md:ml-20 flex sm:flex-col mt-2 sm:mt-0">
             <p>Priority:</p>
-            <button id="modules" class="px-5 rounded-lg bg-red-300 sm:ml-0 ml-5">
+            <button
+              id="modules"
+              class="px-5 rounded-lg bg-red-300 sm:ml-0 ml-5"
+            >
               High
             </button>
           </div>

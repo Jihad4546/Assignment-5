@@ -13,11 +13,15 @@ const dataLabels = document.getElementById("data-labels");
 const modulDescription = document.getElementById("modul-description");
 const assignee = document.getElementById("assignee");
 const modules = document.getElementById("modules");
-const btnSearch = document.getElementById('btn-search')
+const btnSearch = document.getElementById('btn-search');
+const loadingSpinner = document.getElementById('loading-spinner');
+const btnSearchMobile = document.getElementById('btn-search-mobile');
 
 let masterData = [];
 
 function activateButton(activeBtn) {
+  
+  
   [allBtn, openBtn, closeBtn].forEach((btn) =>
     btn.classList.remove("btn-primary"),
   );
@@ -65,6 +69,7 @@ if (buttonColor === "high") {
 }
 
 const displayData = (data) => {
+  loadingSpinner.classList.add('hidden')
   cardContainer.innerHTML = ""; // Purono card gulo muche fela
   data.forEach((element) => {
     const div = document.createElement("div");
@@ -87,6 +92,7 @@ async function alldataLoad() {
 }
 
 allBtn.addEventListener("click", function () {
+  // loadingSpinner.classList.add('hidden')
   activateButton(allBtn);
   displayData(masterData);
   allIssue.innerText = masterData.length + " Issues";
@@ -122,19 +128,21 @@ async function moduls(dataId) {
   assignee.textContent = modulData.assignee;
   modules.textContent = modulData.priority;
 }
-btnSearch.addEventListener("click", () => {
-  const inputSearch = document
-    .getElementById("input-search")
+
+btnSearch.addEventListener("click", searchFunction)
+btnSearchMobile.addEventListener("click", searchFunction)
+
+function searchFunction() {
+  const inputSearch = document.getElementById("input-search")
   const inputvalue = inputSearch.value.trim().toLowerCase();
 
   const filteredData = masterData.filter((item) =>
     item.title.toLowerCase().includes(inputvalue) 
   );
-   
+
   displayData(filteredData);
   allIssue.innerText = filteredData.length + " Issues";
   inputSearch.value = '';
-});
-
+}
 // Initial Load
 alldataLoad();
