@@ -13,6 +13,7 @@ const dataLabels = document.getElementById("data-labels");
 const modulDescription = document.getElementById("modul-description");
 const assignee = document.getElementById("assignee");
 const modules = document.getElementById("modules");
+const btnSearch = document.getElementById('btn-search')
 
 let masterData = [];
 
@@ -26,7 +27,7 @@ function activateButton(activeBtn) {
 function createCardHTML(element) {
   const isOpen = element.status === "open";
   const borderColor = isOpen ? "border-green-400" : "border-indigo-600";
-  const statusImg = isOpen ? "assets/Open-Status.png": " assets/Closed-Status.png";
+  const statusImg = isOpen ? "assets/Open-Status.png" : "assets/Closed-Status.png";
 
   return `
         <div onclick= 'moduls(${element.id})' class="border-t-2 ${borderColor} card shadow mb-4 grid grid-cols-1">
@@ -35,7 +36,7 @@ function createCardHTML(element) {
                 <button class="px-5 py-1 rounded-lg bg-red-300">${element.priority}</button>
             </div>
             <h2 class="text-lg font-bold mt-5 pl-5">${element.title}</h2>
-            <p class="line-clamp-2 pl-5 pr-5 mt-3">${element.description.slice(0, 60)}...</p>
+            <p class="line-clamp-2 pl-5 pr-5 mt-3">${element.description.slice(0 , 60)}...</p>
             <div class="sm:flex gap-2 mt-3 p-5 ">
                 <button class="btn btn-xs bg-[#FEECEC] rounded-2xl">
                     <img src="assets/BugDroid.png" alt="" />
@@ -110,5 +111,18 @@ async function moduls(dataId) {
   assignee.textContent = modulData.assignee;
   modules.textContent = modulData.status;
 }
+btnSearch.addEventListener("click", () => {
+  const inputSearch = document
+    .getElementById("input-search")
+    .value.trim().toLowerCase();
+
+  const filteredData = masterData.filter((item) =>
+    item.title.toLowerCase().includes(inputSearch)
+  );
+
+  displayData(filteredData);
+  allIssue.innerText = filteredData.length + " Issues";
+});
+
 // Initial Load
 alldataLoad();
